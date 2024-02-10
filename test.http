@@ -1,0 +1,43 @@
+@baseurl = http://localhost:8080
+
+###
+
+GET {{baseurl}}/shopping-list
+
+###
+# @name createItem
+POST {{baseurl}}/shopping-list HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Milk"
+}
+
+###
+@itemId = {{createItem.response.body.$.id}}
+
+###
+GET {{baseurl}}/shopping-list/{{itemId}} HTTP/1.1
+
+###
+POST {{baseurl}}/shopping-list HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Bread",
+    "quantity": 2
+}
+
+
+###
+PUT {{baseurl}}/shopping-list/{{itemId}} HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Milk",
+    "quantity": 2,
+    "is_done": true
+}
+
+###
+DELETE {{baseurl}}/shopping-list/{{itemId}} HTTP/1.1
