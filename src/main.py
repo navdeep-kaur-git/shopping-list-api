@@ -13,7 +13,7 @@ async def get():
 
 
 @app.get("/shopping-list/{id}")
-def getById(id: str):
+async def getById(id: str):
     i = data.getById(id)
     if i is None:
         return Response(status_code=404)
@@ -21,12 +21,12 @@ def getById(id: str):
 
 
 @app.post("/shopping-list")
-def add(request: AddItemRequest):
+async def add(request: AddItemRequest):
     return data.add(request.name, request.quantity)
 
 
 @app.put("/shopping-list/{id}")
-def update(id: str, request: UpdateItemRequest):
+async def update(id: str, request: UpdateItemRequest):
     i = data.getById(id)
     if i is None:
         return Response(status_code=404)
@@ -35,7 +35,7 @@ def update(id: str, request: UpdateItemRequest):
 
 
 @app.delete("/shopping-list/{id}")
-def getById(id: str):
+async def delete(id: str):
     i = data.getById(id)
     if i is None:
         return Response(status_code=404)
